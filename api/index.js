@@ -16,7 +16,24 @@ try {
 mongoose.connection.on('disconnect',()=>{
     console.log('MongoDB disconnected');
 });
-
+app.use(express.json());
+const hotelRoute = require("./routes/hotels");
+const authRoute = require("./routes/auth");
+app.use("/api/hotel",hotelRoute);
+app.use("/api/auth",authRoute);
+app.use((err,req,res,next)=>{
+    const errStatus = err.status || 500
+    const errMsg = err.message || "something  wrong"
+    return res.status(errStatus).json(
+        {
+            success: false,
+            status: errStatus,
+            message: errMsg,
+            stack: err.stack
+        }
+    )
+    
+});
 app.listen(process.env.PORT,()=>
 {   
         connect();
