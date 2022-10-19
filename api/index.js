@@ -2,7 +2,9 @@
 const { config } = require('dotenv');
 const  express = require('express');
 const mongoose = require('mongoose');
+const cookieParser = require('cookie-parser')
 const app = express();
+
 require('dotenv').config();
 
 // mongodb connection
@@ -16,6 +18,7 @@ try {
 mongoose.connection.on('disconnect',()=>{
     console.log('MongoDB disconnected');
 });
+app.use(cookieParser())
 app.use(express.json());
 const hotelRoute = require("./routes/hotels");
 const authRoute = require("./routes/auth");
