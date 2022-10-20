@@ -22,8 +22,10 @@ app.use(cookieParser())
 app.use(express.json());
 const hotelRoute = require("./routes/hotels");
 const authRoute = require("./routes/auth");
+const userRoute = require("./routes/user");
 app.use("/api/hotel",hotelRoute);
 app.use("/api/auth",authRoute);
+app.use("/api/user",userRoute);
 app.use((err,req,res,next)=>{
     const errStatus = err.status || 500
     const errMsg = err.message || "something  wrong"

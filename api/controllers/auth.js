@@ -16,9 +16,7 @@ module.exports.register = async(req, res,next)=>{
         }  
       )
       await newUser.save()
-      res.cookie('access-token',token,{
-        httpOnly: true
-      }).status(200).send("user has been registered successfully")
+      res.status(200).send("user has been registered successfully")
     }catch(err){
         next(err);
     }
@@ -31,7 +29,9 @@ module.exports.login = async(req,res,next)=>{
        if(!isPassword)return next(createError(404,"user email or password incorrect"));
        const token = jwt.sign({id:user._id,isAdmin:user.isAdmin},process.env.JWT)
        const {password,isAdmin,...othersDetails} =user._doc;
-      res.status(200).json(othersDetails);
+      res.cookie('access_token',token,{
+        httpOnly: true
+      }).status(200).json(othersDetails);
     }catch(err){
         next(err);
     }
