@@ -7,21 +7,10 @@ const RoomSchema = new Schema({
         required:true,
     },
     price:{
-        type:number,
+        type:Number,
         required:true,
     },
     maxPeople:{
-        type:String,
-        required:true,
-    },
-    distance:{
-        type:String,
-        required:true,
-    },
-    photos:{
-        type:[String],
-    },
-    title:{
         type:String,
         required:true,
     },
@@ -29,23 +18,9 @@ const RoomSchema = new Schema({
         type:String,
         required:true,
     },
-    rating:{
-        type:Number,
-        required:true,
-        min:0,
-        max:5,
-    },
-    rooms:{
-        type:[String],
-    },
-    cheapestPrice:{
-        type:Number,
-        required:true,
-    },
-    featured:{
-        type:Boolean,
-        default:false,
-    }
-})
+
+    roomNumbers:[{number:Number,unavailableDate:{type:[Date]}}]
+},{timestamps:true}
+);
 
 module.exports = mongoose.model("Room",RoomSchema)
