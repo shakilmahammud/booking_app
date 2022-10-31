@@ -12,5 +12,8 @@ router.delete('/:id',verifyAdmin,deleteHotel);
 router.get('/:id',getByIdHotel);
 //get all
 router.get('/', getAllHotel);
+//count 
+router.get('/countByCity', getAllHotel);
+router.get('/countByType', getAllHotel);
 
 module.exports=router;

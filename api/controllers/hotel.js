@@ -41,3 +41,12 @@ module.exports.getAllHotel = async(req, res,next) => {
         next(err);
     }
 }
+module.exports.countByCity = async(req, res,next) => { 
+    const cities = req.query.cities.split(",");
+    try {
+    const hotel = await Hotel.find({});
+    res.status(200).json(hotel)
+    }catch(err) {
+        next(err);
+    }
+}
